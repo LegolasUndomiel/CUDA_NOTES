@@ -1,0 +1,5 @@
+target("gpuDevice")
+    set_kind("binary")
+    add_files("*.cu")
+    add_cugencodes("native")
+target_end()
