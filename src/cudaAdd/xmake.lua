@@ -1,0 +1,6 @@
+target("cudaAdd")
+    set_kind("binary")
+    add_files("*.cu")
+    add_cugencodes("native")
+    add_links("cublas")
+target_end()
