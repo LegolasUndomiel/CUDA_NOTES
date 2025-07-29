@@ -1,21 +1,7 @@
-﻿#include <cstdio>
-#include <cstdlib>
+﻿#include "cudaErrMsg.h"
 #include <cublas_v2.h>
-#include <cuda_runtime.h>
 
 #define N (1024 * 1024)
-
-#define CUDA_CHECK(call)                                                                     \
-    {                                                                                        \
-        do {                                                                                 \
-            const cudaError_t error = call;                                                  \
-            if (error != cudaSuccess) {                                                      \
-                fprintf(stderr, "CUDA Error: %s:%d\n", __FILE__, __LINE__);                  \
-                fprintf(stderr, "code: %d\nreason: %s\n", error, cudaGetErrorString(error)); \
-                exit(EXIT_FAILURE);                                                          \
-            }                                                                                \
-        } while (0);                                                                         \
-    }
 
 // 使用 __restrict 关键字来优化内存访问
 // __restrict 告诉编译器指针指向的内存不会被其他指针所指向

@@ -22,6 +22,9 @@ on_clean(function (target)
     os.rm(target:targetdir())
 end)
 
+
+add_includedirs("$(projectdir)/include")
+add_headerfiles("$(projectdir)/include/**.h")
 add_includedirs("$(env CUDA_PATH)/include")
 
 includes("**/xmake.lua")
