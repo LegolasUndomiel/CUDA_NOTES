@@ -1,4 +1,4 @@
-﻿#include "cudaErrMsg.h"
+﻿#include "cudaTimer.h"
 #include <cublas_v2.h>
 
 #define N (1024 * 1024)
@@ -27,24 +27,33 @@ void test01() {
     }
 
     // GPU显存
+    cudaTimer timer;
     int *d_a, *d_b, *d_c;
     CUDA_CHECK(cudaMalloc((void **)&d_a, n * sizeof(int)));
     CUDA_CHECK(cudaMalloc((void **)&d_b, n * sizeof(int)));
     CUDA_CHECK(cudaMalloc((void **)&d_c, n * sizeof(int)));
 
     // 将数据从CPU内存复制到GPU显存
+    timer.start();
     CUDA_CHECK(cudaMemcpy(d_a, h_a, n * sizeof(int), cudaMemcpyHostToDevice));
+    timer.stop();
+    timer.start();
     CUDA_CHECK(cudaMemcpy(d_b, h_b, n * sizeof(int), cudaMemcpyHostToDevice));
+    timer.stop();
 
     // 执行核函数
+    timer.start();
     addKernel<<<128, 256>>>(d_a, d_b, d_c, n);
 
     // 确保核函数执行没有错误
     CUDA_CHECK(cudaGetLastError());
     CUDA_CHECK(cudaDeviceSynchronize());
+    timer.stop();
 
     // 将结果从GPU显存复制回CPU内存
+    timer.start();
     CUDA_CHECK(cudaMemcpy(h_c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost));
+    timer.stop();
 
     // 验证结果
     for (int i = 0; i < n; ++i) {
@@ -80,6 +89,7 @@ void test02() {
     }
 
     // GPU显存
+    cudaTimer timer;
     float *d_a, *d_b;
     CUDA_CHECK(cudaMalloc((void **)&d_a, n * sizeof(float)));
     CUDA_CHECK(cudaMalloc((void **)&d_b, n * sizeof(float)));
@@ -90,17 +100,25 @@ void test02() {
 
     // 将数据从CPU内存复制到GPU显存
     // cublasSetVector(int n, int elemSize, const void *x, int incx, void *devicePtr, int incy)
+    timer.start();
     cublasSetVector(n, sizeof(float), h_a, 1, d_a, 1);
+    timer.stop();
+    timer.start();
     cublasSetVector(n, sizeof(float), h_b, 1, d_b, 1);
+    timer.stop();
 
     // 使用 cuBLAS 执行向量加法
     float alpha = 1.0f;
     // cublasSaxpy(cublasHandle_t handle, int n, const float *alpha, const float *x, int incx, float *y, int incy)
+    timer.start();
     cublasSaxpy(handle, n, &alpha, d_a, 1, d_b, 1); // d_b = d_a + 1.0f * d_b
+    timer.stop();
 
     // 将结果从GPU显存复制回CPU内存
     // cublasGetVector(int n, int elemSize, const void *x, int incx, void *y, int incy)
+    timer.start();
     cublasGetVector(n, sizeof(float), d_b, 1, h_c, 1);
+    timer.stop();
 
     // 验证结果
     for (int i = 0; i < n; ++i) {
