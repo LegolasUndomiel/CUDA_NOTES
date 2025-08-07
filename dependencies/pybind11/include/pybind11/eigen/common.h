@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 The pybind Community.
+// Copyright (c) 2023 The pybind Community.
 
 #pragma once
 

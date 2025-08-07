@@ -16,6 +16,7 @@ def get_staged_files():
     return [
         f for f in result.stdout.splitlines() 
         if Path(f).suffix in extensions and os.path.exists(f)
+        and 'dependencies' not in f
     ]
 
 def convert_to_utf8_bom(filepath):

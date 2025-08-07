@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "pybind11_tests.h"
 
 #include <stdexcept>

@@ -1,4 +1,4 @@
-﻿/*
+/*
     pybind11/iostream.h -- Tools to assist with redirecting cout and cerr to Python
 
     Copyright (c) 2017 Henry F. Schreiner
