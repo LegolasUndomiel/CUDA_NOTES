@@ -7,7 +7,8 @@ int main(int argc, char const *argv[]) {
 
     // 计时
 
-    timer.stop();
+    float elapsedTime = timer.stop();
+    printf("Elapsed time: %g ms\n", elapsedTime);
 
     return 0;
 }

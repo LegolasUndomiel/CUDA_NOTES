@@ -45,7 +45,6 @@ class cudaTimer {
         float elapsedTime;
         CUDA_CHECK(cudaEventElapsedTime(&elapsedTime, startEvent_, stopEvent_));
         running_ = false;
-        printf("Elapsed time: %g ms\n", elapsedTime);
         return elapsedTime;
     }
 

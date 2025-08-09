@@ -2,24 +2,18 @@
 #define __MANDELBROT_H__
 #pragma once
 
-#include "cudaTimer.h"
-#include <glad/glad.h>
-
-#include <GLFW/glfw3.h>
-#include <matplotlibcpp.h>
-
 class Mandelbrot {
   private:
     /* data */
-    int width_, height_, maxIterations_;
+    int width_, height_;
+    unsigned short int maxIterations_;
     unsigned short int *h_data_;
     unsigned short int *d_data_;
 
   public:
-    Mandelbrot(int, int, int);
+    Mandelbrot(int, int, unsigned short int);
     ~Mandelbrot();
     void pixelCalculation();
-    void save();
     void copyBack();
     void renderWithOpenGL();
 };
