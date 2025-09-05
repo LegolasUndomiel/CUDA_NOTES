@@ -32,17 +32,16 @@
 *.app
 
 # xmake
-.xmake
-build
-vsxmake2017
-vsxmake2019
-vsxmake2022
+.xmake/
+bin/
+build/
+release/
+vsxmake2017/
+vsxmake2019/
+vsxmake2022/
 
 # vscode
-.vscode
+.vscode/
 
-# release
-release
-
-# bin
-bin
+# python
+__pycache__/

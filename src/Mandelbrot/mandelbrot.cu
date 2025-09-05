@@ -83,11 +83,12 @@ void Mandelbrot::pixelCalculation() {
 void Mandelbrot::pixelCalculationOMP() {
     unsigned short int value;
 
-    int threads = omp_get_max_threads();
+    int threads = 1;
+    // threads = omp_get_max_threads();
     // 启动计时器
     auto start = high_resolution_clock::now();
-    omp_set_num_threads(threads);
-#pragma omp parallel for
+    // omp_set_num_threads(threads);
+    // #pragma omp parallel for
     for (int y = 0; y < height_; ++y) {
         for (int x = 0; x < width_; ++x) {
             float real = (x - width_ / 2.0) * 3.84 / width_;
