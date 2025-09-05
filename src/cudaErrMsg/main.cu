@@ -1,4 +1,4 @@
-﻿#include "cudaErrMsg.h"
+﻿#include "cudaErrMsg.cuh"
 
 int main(int argc, char const *argv[]) {
     double *h_data = (double *)malloc(1024 * sizeof(double));

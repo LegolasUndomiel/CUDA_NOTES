@@ -42,8 +42,13 @@ target("mandelbrotBinary")
 target_end()
 
 target("mandelbrot")
+    -- 这里编译出来的动态库的文件名需要和Python模块名相同
+    -- 否则Python导入模块时会报错
+    -- 当target的名称和Python模块名不同时，可以通过set_basename来设置
+    set_basename("mandelbrot")
+
     set_kind("shared")
-    add_rules("python.library")
+    add_rules("python.module")
 
     add_includedirs("$(env CONDA_INCLUDE)")
     add_includedirs("$(projectdir)/dependencies/pybind11/include")

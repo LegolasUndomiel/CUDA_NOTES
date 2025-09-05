@@ -1,4 +1,4 @@
-﻿#include "cudaTimer.h"
+﻿#include "cudaTimer.cuh"
 #include "mandelbrot.h"
 #include <chrono>
 #include <cuda_runtime.h>

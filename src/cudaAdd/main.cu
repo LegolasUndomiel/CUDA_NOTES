@@ -1,4 +1,4 @@
-﻿#include "cudaTimer.h"
+﻿#include "cudaTimer.cuh"
 #include <cublas_v2.h>
 
 #define N (1024 * 1024)

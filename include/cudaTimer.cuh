@@ -2,7 +2,7 @@
 #define __CUDA_TIMING_H__
 #pragma once
 
-#include "cudaErrMsg.h"
+#include "cudaErrMsg.cuh"
 #include <stdexcept>
 
 class cudaTimer {

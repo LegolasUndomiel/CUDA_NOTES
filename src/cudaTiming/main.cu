@@ -1,4 +1,4 @@
-﻿#include "cudaTimer.h"
+﻿#include "cudaTimer.cuh"
 
 int main(int argc, char const *argv[]) {
     cudaTimer timer;
