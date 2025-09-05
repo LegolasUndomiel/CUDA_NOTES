@@ -1,4 +1,4 @@
-target("MandelbrotStatic")
+target("mandelbrotStatic")
     set_kind("static")
     -- 编译CUDA静态库时必须这样设置
     -- 启用设备链接以支持静态库设备代码链接
@@ -17,6 +17,7 @@ target("MandelbrotStatic")
         add_culdflags("-Xcompiler -fopenmp")
     end
     if is_plat("windows") then
+        set_runtimes("MD")
         -- OpenMP
         add_cuflags("-Xcompiler /openmp")
         add_culdflags("-Xcompiler /openmp")
@@ -28,20 +29,21 @@ if is_plat("linux") then
     add_ldflags("-fopenmp")
 end
 if is_plat("windows") then
+    set_runtimes("MD")
     -- OpenMP
     add_ldflags("/openmp")
 end
 
-target("Mandelbrot")
+target("mandelbrotBinary")
     set_kind("binary")
     add_files("main.cu")
 
-    add_deps("MandelbrotStatic")
+    add_deps("mandelbrotStatic")
 target_end()
 
-target("MandelbrotPybind")
+target("mandelbrot")
     set_kind("shared")
-    add_rules("python.module")
+    add_rules("python.library")
 
     add_includedirs("$(env CONDA_INCLUDE)")
     add_includedirs("$(projectdir)/dependencies/pybind11/include")
@@ -52,5 +54,5 @@ target("MandelbrotPybind")
     add_links("python3")
     add_linkdirs("$(env PYTHON_LIB)")
 
-    add_deps("MandelbrotStatic")
+    add_deps("mandelbrotStatic")
 target_end()
