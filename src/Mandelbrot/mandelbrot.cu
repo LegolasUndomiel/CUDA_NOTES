@@ -83,10 +83,10 @@ void Mandelbrot::pixelCalculation() {
 void Mandelbrot::pixelCalculationOMP() {
     unsigned short int value;
 
-    int threads = 1;
-    // threads = omp_get_max_threads();
     // 启动计时器
     auto start = high_resolution_clock::now();
+    int threads = 1;
+    // threads = omp_get_max_threads();
     // omp_set_num_threads(threads);
     // #pragma omp parallel for
     for (int y = 0; y < height_; ++y) {
